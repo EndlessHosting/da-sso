@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-Us">
+<head>
+
+	<meta charset="utf-8">
+
+	<title>EH Customer SSO - DirectAdmin</title>
+
+	<link rel="stylesheet" href="/static/login.css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300'>
+
+	<!--[if lt IE 9]>
+		<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+	<div id="login" style="margin-top: 200px">
+
+		<h1><strong>Welcome!</strong> Please login using your Endless Hosting DirectAdmin credentials.</h1>
+
+		<form action="/auth/da" method="post">
+
+			<fieldset>
+                <p id="error"></p>
+				<p><input type="text" name="username" id="username" required value="Username" onBlur="if(this.value=='')this.value='Username'" onFocus="if(this.value=='Username')this.value='' "></p> <!-- JS because of IE support; better: placeholder="Username" -->
+
+				<p><input name="password" id="password" type="password" required value="Password" onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' "></p> <!-- JS because of IE support; better: placeholder="Password" -->
+
+				<p><a href="https://da.theendlessweb.com:2222">Forgot Password?</a></p>
+                <input type="hidden" id="redirect" name="redirect">
+
+				<p><input type="submit" value="Login"></p>
+
+			</fieldset>
+
+		</form>
+
+
+	</div> <!-- end login -->
+
+</body>
+<script>
+    // The following code simply sets the redirect POST value to the return provided in the URL
+    window.onload = function WindowLoad(event) {
+        let returnValue = "{{ returnValue }}"
+        if(returnValue === ""){
+            document.getElementById("redirect").value = getUrlVars()['return'];
+        }
+        else{
+            document.getElementById("redirect").value = returnValue;
+        }
+        document.getElementById("error").innerText = "{{ pageError }}";
+    }
+
+    // Helper function to parse the URL parameters
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+</script>
+</html>

@@ -1,0 +1,9 @@
+class Config:
+    da_url = "" # DirectAdmin URL
+    blesta_url = "" # Unused
+    username = "" # DirectAdmin username for email verification
+    pwd = "" # DirectAdmin API Token or Password
+    hello_world_text = "EH Customer SSO Server. Version 1.1"
+    encode_pwd = ''
+    authorized_redirects = ["support.theendlessweb.com"] # Redirect domains authorized for the JWT
+
